@@ -55,7 +55,7 @@ public class ProductService {
         return true;
     }
 
-    public boolean addOffer(String productId, double percent) {
+    public boolean addOffer(Integer productId, double percent) {
         for (Product p : products) {
             if (p.getId().equals(productId)) {
                 double afterOffer = p.getPrice() - ((percent / 100) * p.getPrice());
@@ -100,7 +100,7 @@ public class ProductService {
     //extra point 4
     // this apply 15 or 50 percent of discount on product
 
-    public boolean useCoupon(String productId, String coupon) {
+    public boolean useCoupon(Integer productId, String coupon) {
         for (Product p : products) {
             if (p.getId().equals(productId)) {
                 if (p.getOfferPrice() != 0)

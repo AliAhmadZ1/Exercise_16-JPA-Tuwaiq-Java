@@ -1,10 +1,7 @@
 package com.example.capstone01_tuwaiqjavabootcamp.Model;
 
 import jakarta.annotation.sql.DataSourceDefinitions;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
@@ -27,12 +24,11 @@ public class MerchantStock {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    @NotEmpty(message = "product-id cannot be empty")
-    private String productId;
-    @NotEmpty(message = "merchant-id cannot be empty")
-    private String merchantId;
-    @NotNull(message = "stock cannot be null")
+    @Column(columnDefinition = "int , foreign key (product_id) references product(id)")
+    private Integer product_id;
+    @Column(columnDefinition = "int , foreign key (merchant_id) references merchant(id)")
+    private Integer merchant_id;
     @Min(value = 10,message = "stock have to be at least 10 in first sign")
-    private int stock;
+    private Integer stock;
 
 }

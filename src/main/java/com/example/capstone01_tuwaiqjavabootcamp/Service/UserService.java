@@ -70,7 +70,7 @@ public class UserService {
                         for (Merchant m : merchantService.getMerchant()) {
                             if (m.getId().equals(merchantId)) { //merchant id
                                 for (MerchantStock ms : merchantStockService.getMerchantStock()) {
-                                    if (ms.getProductId().equals(productId) && ms.getMerchantId().equals(merchantId)) { //merchant stock
+                                    if (ms.getProduct_id().equals(productId) && ms.getMerchant_id().equals(merchantId)) { //merchant stock
                                         if (ms.getStock() > 0) { //check stock
                                             if (u.getBalance() >= p.getPrice()) { //check balance
                                                 ms.setStock(ms.getStock() - 1);
@@ -111,7 +111,7 @@ public class UserService {
                     if (c.getName().equalsIgnoreCase(categoryName)) {
                         for (MerchantStock ms : merchantStockService.getMerchantStock()) {
                             if (ms.getStock() >= 1) {
-                                String add = "product: " + p.getName() + " with ID: " + p.getId() + ". Merchant ID: " + ms.getMerchantId();
+                                String add = "product: " + p.getName() + " with ID: " + p.getId() + ". Merchant ID: " + ms.getMerchant_id();
                                 filteredList.add(add);
                             }
                         }

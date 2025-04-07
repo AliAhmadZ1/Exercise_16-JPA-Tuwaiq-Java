@@ -28,19 +28,16 @@ public class MerchantStockController {
     @PostMapping("/add")
     public ResponseEntity addMerchantStock(@RequestBody @Valid MerchantStock merchantStock, Errors errors) {
         if (errors.hasErrors()) {
-            String message = errors.getFieldError().getDefaultMessage();
-            return ResponseEntity.status(400).body(message);
+            return ResponseEntity.status(400).body(errors.getFieldError().getDefaultMessage());
         }
-        if (merchantStockService.addMerchantStock(merchantStock))
-            return ResponseEntity.status(200).body(new ApiResponse("new merchantStock is added"));
-        return ResponseEntity.status(400).body(new ApiResponse("already exist"));
+        merchantStockService.addMerchantStock(merchantStock);
+        return ResponseEntity.status(200).body(new ApiResponse("new merchantStock is added"));
     }
 
     @PutMapping("/update/{id}")
-    public ResponseEntity updateMerchantStock(@PathVariable String id, @RequestBody @Valid MerchantStock merchantStock, Errors errors) {
+    public ResponseEntity updateMerchantStock(@PathVariable Integer id, @RequestBody @Valid MerchantStock merchantStock, Errors errors) {
         if (errors.hasErrors()) {
-            String message = errors.getFieldError().getDefaultMessage();
-            return ResponseEntity.status(400).body(message);
+            return ResponseEntity.status(400).body(errors.getFieldError().getDefaultMessage());
         }
         if (merchantStockService.updateMerchantStock(id, merchantStock))
             return ResponseEntity.status(200).body(new ApiResponse("merchantStock is updated"));
@@ -48,7 +45,7 @@ public class MerchantStockController {
     }
 
     @DeleteMapping("/delete/{id}")
-    public ResponseEntity deleteMerchantStock(@PathVariable String id) {
+    public ResponseEntity deleteMerchantStock(@PathVariable Integer id) {
         if (merchantStockService.deleteMerchantStock(id))
             return ResponseEntity.status(200).body(new ApiResponse("merchantStock is deleted"));
         return ResponseEntity.status(400).body(new ApiResponse("not found"));

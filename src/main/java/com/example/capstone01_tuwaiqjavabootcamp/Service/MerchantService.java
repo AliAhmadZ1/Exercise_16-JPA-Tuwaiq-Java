@@ -59,7 +59,7 @@ public class MerchantService {
                 for (Product p : productService.getProduct()) {
                     if (p.getId().equals(productId)) {
                         for (MerchantStock ms : merchantStockService.getMerchantStock()) {
-                            if (ms.getMerchantId().equals(merchantId) && ms.getProductId().equals(productId)) {
+                            if (ms.getMerchant_id().equals(merchantId) && ms.getProduct_id().equals(productId)) {
                                 ms.setStock(ms.getStock() + stockAmount);
                                 return "stocked";
                             }
@@ -73,13 +73,13 @@ public class MerchantService {
     }
 
 
-    public boolean addProductOffer(String merchantId, double percent) {
+    public boolean addProductOffer(Integer merchantId, double percent) {
         boolean addOffer = false;
         for (Merchant m : merchants) {
             if (m.getId().equals(merchantId)) {
                 for (MerchantStock ms : merchantStockService.getMerchantStock()) {
-                    if (m.getId().equals(ms.getMerchantId())) {
-                        addOffer = productService.addOffer(ms.getProductId(), percent);
+                    if (m.getId().equals(ms.getMerchant_id())) {
+                        addOffer = productService.addOffer(ms.getProduct_id(), percent);
                     }
                 }
             }

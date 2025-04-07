@@ -69,7 +69,7 @@ public class MerchantController {
     //extra point 2
     // merchant can add offer on his products
     @PutMapping("/add-offer/{merchantId},{percent}")
-    public ResponseEntity addProductOffer(@PathVariable String merchantId,@PathVariable double percent){
+    public ResponseEntity addProductOffer(@PathVariable Integer merchantId,@PathVariable double percent){
         if (merchantService.addProductOffer(merchantId, percent))
             return ResponseEntity.status(200).body(new ApiResponse("offer is applied"));
         return ResponseEntity.status(400).body(new ApiResponse("merchant doesn't exist or he doesn't have products"));
